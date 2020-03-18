@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HeloController {
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam("name" )String name, Model model){
-        model.addAttribute("name",name);
-        return  "hello";
+    @GetMapping("/")
+    public String hello(){
+        return "index";
     }
 }
