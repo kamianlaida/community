@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>麻将社区</title>
+    <title>发布 -- 麻将社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/community.css}">
     <!--<link rel="stylesheet" th:href="@{../static/css/bootstrap.min.css}">-->
     <!--<link rel="stylesheet" th:href="@{../static/css/bootstrap-theme.min.css}">-->
     <!--<script rel="stylesheet" th:src="@{../static/js/bootstrap.min.js}"></script>-->
@@ -36,7 +37,7 @@
                 <li th:if="${session.user != null}">
                     <a href="/publish">发布</a>
                 </li>
-                <li class="dropdown" th:if="${session.user != null}" >
+                <li class="dropdown" th:if="${session.user != null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getName()}"> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">消息中心</a></li>
@@ -44,13 +45,51 @@
                         <li><a href="#">退出登录</a></li>
                     </ul>
                 </li>
-                <li th:if=" ${session.user==null}">
+                <li th:if=" ${session.user == null}">
                     <a href="https://github.com/login/oauth/authorize?client_id=4d8adb9fe820101484f7&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a></li>
 
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<!--中间部分-->
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="background-color: pink">
 
+            <h2> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
+            <hr>
+            <form action="/publish" method="post">
+                <div class="form-group">
+                    <label for="title" >问题标题 (简单扼要)</label>
+                    <input type="text" th:value="${title}" class="form-control" id="title" name="title" placeholder="问题标题...">
+                </div>
+                <div class="form-group">
+                    <label for="description">问题补充 (必填,请参照右侧提示)</label>
+                    <textarea class="form-control" th:value="${description}" name="description" id="description" cols="30" rows="10" placeholder="问题补充"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tag">添加标签</label>
+                    <input type="text" th:value="${tag}" class="form-control" id="tag" name="tag" placeholder="输入标签,以,号分割">
+                </div>
+                <div class="container-fluid main">
+                    <div class="row">
+                        <div class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" th:text="${error}" th:if="${error!=null}"></div>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 "style="float: right;">
+                            <button type="submit " class="btn btn-success btn-publish ">发布</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="background-color: yellow ">
+            <h3>发起问题指南</h3>
+            <ul>
+                <li>提示1</li>
+                <li>提示2</li>
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 </html>

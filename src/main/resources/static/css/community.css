@@ -1,0 +1,12 @@
+body{
+    background-color: #efefef;
+}
+.main{
+    background-color: bisque;
+    margin: 30px;
+    padding: 10px;
+}
+.btn-publish{
+    float:right;
+    margin-bottom: 15px;
+}
